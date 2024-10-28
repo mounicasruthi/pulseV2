@@ -1,5 +1,12 @@
 package user
 
+import (
+	"context"
+	"time"
+	"strconv"
+	"github.com/mounicasruthi/pulse2.0/util"
+)
+
 type service struct {
 	Repository
 	timeout time.Duration
@@ -12,7 +19,7 @@ func NewService(repository Repository) Service {
 //this will be called by the handler layer
 func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUserRes, error) {
 
-	ctx, cancel := context.withTimeout(c, s.timeout)
+	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
 	hashedPassword, err := util.HashPassword(req.Password)
@@ -27,7 +34,7 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 		Password: hashedPassword,
 	}
 
-	s.Repository.CreateUser(ctx, u)
+	r, err := s.Repository.CreateUser(ctx, u)
 
 	if err != nil {
 		return nil, err

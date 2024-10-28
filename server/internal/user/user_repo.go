@@ -1,6 +1,11 @@
 // bottom-most layer that interacts with the database
 
-packer user
+package user
+
+import (
+	"context"
+	"database/sql"
+)
 
 //interface DBTX
 type DBTX interface {

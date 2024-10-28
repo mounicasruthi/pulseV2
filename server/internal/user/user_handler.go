@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type Handler struct {
@@ -20,7 +21,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	h.Service.CreateUser(c.Request.Contex(), &u)
+	res, err := h.Service.CreateUser(c.Request.Context(), &u)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

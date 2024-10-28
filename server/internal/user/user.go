@@ -2,11 +2,13 @@
 package user
 
 import (
+	"context"
+	
 )
 
 // User struct
 type User struct {
-	ID  int64  string `json:"id" db:"id"`
+	ID  int64  `json:"id" db:"id"`
 	Username  string `json:"username" db:"username"`
 	Email  string `json:"email" db:"email"`
 	Password  string `json:"password" db:"password"`
