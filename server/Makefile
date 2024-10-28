@@ -12,5 +12,10 @@ createdb:
 dropdb:
 	sudo docker exec -it postgres15 dropdb go-chat
 
+migrateup:
+	migrate -path db/migrations -database "postgresql://root:password@localhost:5433/go-chat?sslmode=disable" -verbose up
 
-.PHONY: postgresinit postgres createdb dropdb
+migratedown:
+	migrate -path db/migrations -database "postgresql://root:password@localhost:5433/go-chat?sslmode=disable" -verbose down
+
+.PHONY: postgresinit postgres createdb dropdb migrateup migratedown
