@@ -7,6 +7,7 @@ import (
 	"github.com/mounicasruthi/pulse2.0/router"
 	"github.com/joho/godotenv"
 	"os"
+	"github.com/mounicasruthi/pulse2.0/internal/ws"
 )
 
 func main() {
@@ -34,7 +35,13 @@ func main() {
 	userSvc := user.NewService(userRep)
 	userHandler := user.NewHandler(userSvc)
 
+	hub := ws.NewHub()
+	wsHandler := ws.NewHandler(hub)
+
+	//seperate go routine to run the hub
+	go hub.Run()
+
 	//initialize the router
-	router.InitRouter(userHandler)
+	router.InitRouter(userHandler, wsHandler)
 	router.Start("0.0.0.0:8080")
 }
