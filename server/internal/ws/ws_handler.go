@@ -59,9 +59,9 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 		return
 	}
 
-	roomID := c.Param("roomID")
-	clientID := c.Param("userID")
-	username := c.Param("username")
+	roomID := c.Param("roomID")  // from the path parameter
+	clientID := c.Query("userID") // from the query parameter
+	username := c.Query("username")
 
 	cl := &Client {
 		Conn: conn,
@@ -116,14 +116,14 @@ type ClientRes struct {
 
 func (h *Handler) GetClients(c *gin.Context) {
 	var clients []ClientRes
-	roomId := c.Param("roomId")
+	roomID := c.Param("roomID")
 
-	if _, ok := h.hub.Rooms[roomId]; !ok {
+	if _, ok := h.hub.Rooms[roomID]; !ok {
 		clients = make([]ClientRes, 0)
 		c.JSON(http.StatusOK, clients)
 	}
 
-	for _, c := range h.hub.Rooms[roomId].Clients {
+	for _, c := range h.hub.Rooms[roomID].Clients {
 		clients = append(clients, ClientRes{
 			ID:       c.ID,
 			Username: c.Username,

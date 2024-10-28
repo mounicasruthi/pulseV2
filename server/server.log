@@ -1,0 +1,17 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /signup                   --> github.com/mounicasruthi/pulse2.0/internal/user.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /login                    --> github.com/mounicasruthi/pulse2.0/internal/user.(*Handler).Login-fm (3 handlers)
+[GIN-debug] GET    /logout                   --> github.com/mounicasruthi/pulse2.0/internal/user.(*Handler).Logout-fm (3 handlers)
+[GIN-debug] POST   /ws/createRoom            --> github.com/mounicasruthi/pulse2.0/internal/ws.(*Handler).CreateRoom-fm (3 handlers)
+[GIN-debug] GET    /ws/joinRoom/:roomId      --> github.com/mounicasruthi/pulse2.0/internal/ws.(*Handler).JoinRoom-fm (3 handlers)
+[GIN-debug] GET    /ws/getRooms              --> github.com/mounicasruthi/pulse2.0/internal/ws.(*Handler).GetRooms-fm (3 handlers)
+[GIN-debug] GET    /ws/getClients/:roomId    --> github.com/mounicasruthi/pulse2.0/internal/ws.(*Handler).GetClients-fm (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+signal: interrupt
