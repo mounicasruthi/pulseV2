@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"github.com/mounicasruthi/pulse2.0/db" 
+	"github.com/mounicasruthi/pulse2.0/internal/user"
 )
 
 func main() {
@@ -14,4 +15,12 @@ func main() {
 		log.Fatal("Could not initialize database connection: %s", err)
 	}
 
+	//initialize the user repository, service and handler
+	userRep := user.NewRepository(dbConn.GetDB())
+	userSvc := user.NewService(userRep)
+	userHandler := user.NewHandler(userSvc)
+
+	//initialize the router
+	router.InitRouter(userHandler)
+	router.Start("0.0.0.0:8080")
 }
