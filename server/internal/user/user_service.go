@@ -5,6 +5,8 @@ import (
 	"time"
 	"strconv"
 	"github.com/mounicasruthi/pulse2.0/util"
+	"github.com/golang-jwt/jwt/v4"
+	"os"
 )
 
 type service struct {
@@ -47,4 +49,48 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 	}
 
 	return res, nil
+}
+
+type MyJWTClaims struct {
+	ID string `json:"id"`
+	Username string `json:"username"`
+	jwt.RegisteredClaims
+}
+
+func (s *service) Login(c context.Context, req *LoginUserReq) (*LoginUserRes, error) {
+
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	u, err := s.Repository.GetUserByEmail(ctx, req.Email)
+
+	if err != nil {
+		return nil, err
+	}
+
+	err = util.CheckPassword(req.Password, u.Password)
+
+	if err != nil {
+		return nil, err
+	}
+
+	//generate jwt token
+    secretKey := os.Getenv("JWT_SECRET")
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, MyJWTClaims{
+
+		ID: strconv.Itoa(int(u.ID)),
+		Username: u.Username,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:  strconv.Itoa(int(u.ID)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24*time.Hour))},
+	})	
+
+	ss, err := token.SignedString([]byte(secretKey))
+
+	if err != nil {
+		return &LoginUserRes{}, err
+	}
+
+	return &LoginUserRes{accessToken: ss, ID: strconv.Itoa(int(u.ID)), Username: u.Username}, nil
+
 }
