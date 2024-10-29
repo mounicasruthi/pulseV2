@@ -1,6 +1,8 @@
+"use client";
+
 import { useState, useContext, useEffect } from 'react'
 import { API_URL } from '../constants' // Import the API URL constant for endpoint references
-import { useRouter } from 'next/router' // Hook for programmatic navigation
+import { useRouter } from 'next/navigation' // Hook for programmatic navigation
 import { AuthContext, UserInfo } from '../modules/auth_provider' // Import Auth context and UserInfo type
 
 const page = () => {
