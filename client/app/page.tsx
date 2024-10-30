@@ -4,12 +4,18 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from './modules/auth_provider';
 import { API_URL } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import { WEBSOCKET_URL } from './constants';
+import { WebsocketContext } from './modules/websocket_provider';
+import {useRouter } from 'next/navigation';
 
 const page = () => {
 
   const [rooms, setRooms] = useState<{ id: string; name: string }[]>([])
   const [roomName, setRoomName] = useState('')
   const { user } = useContext(AuthContext)
+  const { setConn } = useContext(WebsocketContext)
+
+  const router = useRouter()
 
   const getRooms = async () => {
     try {
@@ -30,7 +36,7 @@ const page = () => {
     getRooms()
   }, [])
 
-  
+
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault()
 
@@ -53,6 +59,19 @@ const page = () => {
       console.log(err)
     }
   }
+
+  
+  const joinRoom = (roomId: string) => {
+    const ws = new WebSocket(
+      `${WEBSOCKET_URL}/ws/joinRoom/${roomId}?userId=${user.id}&username=${user.username}`
+    )
+    if (ws.OPEN) {
+      setConn(ws)
+      router.push('/chat')
+      return
+    }
+  }
+
 
   return (
     <>
@@ -93,7 +112,7 @@ const page = () => {
                   </button>
                 </div>
               </div>
-            ))} }
+            ))} 
           </div>
         </div>
       </div>

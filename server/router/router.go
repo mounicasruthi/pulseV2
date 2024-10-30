@@ -4,7 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mounicasruthi/pulse2.0/internal/user"
 	"github.com/mounicasruthi/pulse2.0/internal/ws"
+	"github.com/gin-contrib/cors"
 	"log"
+	"time"
 )
 
 var r *gin.Engine

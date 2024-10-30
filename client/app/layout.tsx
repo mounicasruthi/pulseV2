@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthContextProvider from "./modules/auth_provider";
+import WebSocketProvider from "./modules/websocket_provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,9 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthContextProvider>
+          <WebSocketProvider>
         <div className='flex flex-col md:flex-row h-full min-h-screen font-sans'>
         {children}
         </div>
+          </WebSocketProvider>
         </AuthContextProvider>
       </body>
     </html>
