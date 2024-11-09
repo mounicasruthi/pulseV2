@@ -144,5 +144,3 @@ Once logged in, users can join or create chat rooms. Each user can see a list of
 - **Typing Indicators**: Real-time indicators to show when users are typing.
 - **Direct Messaging**: Allow users to send private messages within the same application.
 - **Message Reactions**: Add emoji reactions for a richer chat experience.
-- **Enhanced Error Handling**: Improve WebSocket connection handling for a more resilient user experience.
-
