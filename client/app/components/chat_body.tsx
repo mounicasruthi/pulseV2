@@ -13,7 +13,7 @@ const ChatBody = ({ data }: { data: Array<Message> }) => {
             >
               <div className='text-sm'>{message.username}</div>
               <div>
-                <div className='bg-blue text-white px-4 py-1 rounded-md inline-block mt-1'>
+                <div className='bg-black text-white px-4 py-1 rounded-md inline-block mt-1'>
                   {message.content}
                 </div>
               </div>

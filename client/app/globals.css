@@ -1,16 +1,17 @@
+/* global.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root {
+  --background: #f9ae9d; /* Burnt Orange */
+  --foreground: #333333; /* Charcoal Gray */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #e3baaf; /* Darker Burnt Orange for dark mode */
+    --foreground: #1C1C1C; /* Darker Charcoal Gray */
   }
 }
 
@@ -18,4 +19,4 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-} */
+}

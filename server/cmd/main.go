@@ -13,9 +13,9 @@ import (
 func main() {
 
 	 // Load .env file
-	 if err := godotenv.Load(); err != nil {
-        log.Fatal("Error loading .env file")
-    }
+	 if err := godotenv.Load("../.env"); err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
 
     // Retrieve the secret key
     secretKey := os.Getenv("JWT_SECRET")
